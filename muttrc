@@ -1,0 +1,157 @@
+##################################
+#This is a muttrc from Kai Timmer#
+##################################
+reset all #alle Einstellungen auf default
+
+######################
+# IMAP Einstellungen #
+######################
+set mail_check=60
+set timeout=15
+
+source source ~/.mutt/login_data
+
+set folder=imaps://imap.googlemail.com/
+set spoolfile=+INBOX
+set record=""
+set postponed="+[Google Mail]/Entwürfe"
+set certificate_file=~/.mutt/certificates
+set header_cache=~/.mutt/hcache
+set delete
+unset wait_key
+unset confirmappend
+# activate TLS if available on the server
+set ssl_starttls=yes
+# always use SSL when connecting to a server
+set ssl_force_tls=yes
+# Don't wait to enter mailbox manually 
+unset imap_passive
+# Automatically poll subscribed mailboxes for new mail (new in 1.5.11)
+#set imap_check_subscribed
+# Reduce polling frequency to a sane level
+set mail_check=60
+# And poll the current mailbox more often (not needed with IDLE in post 1.5.11)
+# set timeout=10
+# keep a cache of headers for faster loading (1.5.9+?)
+set header_cache=~/.hcache
+# Display download progress every 5K
+set net_inc=5
+set rfc2047_parameters=yes
+
+###########
+#Der Pager#
+###########
+set sort=threads
+set pager_context=1
+set pager_index_lines=10
+set index_format="%4C %Z %D %-25.25n %s"
+set date_format="[%d.%m.%y %H:%M]"
+#set ascii_chars 
+
+################
+#Maillinglisten#
+################
+subscribe \
+ clug@clug.de \
+ team@linux-tage.de 
+
+#############
+#Mails lesen#
+#############
+ignore * # Keinen Header anzeigen
+unignore From: Date: Subject: To: Cc: Reply-To:
+#unignore User-Agent: X-Agent: X-Mailer: X-Mailing-List:
+#unignore X-Operating-System:
+#unignore * # zum testen
+
+# take a look at the result of spamassassin:
+# unignore x-spam-status
+
+#macro index <F12> '<tag-pattern>~N<enter>;<toggle-new><tag-pattern>~O<enter>;<clear-flag>O<untag-pattern>~A<enter>' 'mark all read, next'
+macro index,pager S "<save-message>=[Google<quote-char> Mail]/Spam<enter>"    "mark message as spam"
+macro index,pager H "<save-message>=INBOX<enter>"               "mark message as ham"
+
+#Reihenfolge der Header
+unhdr_order *
+  hdr_order \
+  From: Reply-To: \
+  User-Agent: X-Agent: X-Mailer: \
+  X-Operating-System: \
+  To: Cc: X-Mailling-List: \
+  Subject: Date: \
+  X-Spam-Status: 
+
+set nomark_old
+set nomove
+
+########
+#Header#
+########
+set realname="Kai Timmer"
+#my_hdr From: kai.timmer@hrz.tu-chemnitz.de
+#my_hdr X-Operating-System: `cat /etc/redhat-release` on `uname -n` (Kernel `uname -r`)
+
+###############################
+#Mails schreiben und Editieren#
+###############################
+set editor="vim -c 'set tw=72 et' -c 'normal }j'"
+set attribution="* %n <%a> [%(%Y-%m-%d %H:%M)]:"
+set edit_headers=yes
+
+# set the envelope sender according to
+# the address used in the From: line.
+# important for bounces.
+set envelope_from 
+set followup_to # generate a Followup-To header
+set ignore_list_reply_to
+
+# The file to use for *saving* new aliases
+# It's a frequent misconception that this
+# file gets automatically sourced - wrong!
+#set alias_file=~/.mutt/aliases
+set pipe_decode
+
+# Sendmail to background
+#set sendmail="/usr/sbin/sendmail -oem -oi"
+#set sendmail_wait="-1"
+#set from=
+
+set query_command = "goobook query '%s'"
+bind editor <Tab> complete-query
+bind editor ^T complete
+macro index,pager a "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
+
+#colors
+source ~/.mutt/color
+
+alternates "(email@kaitimmer\.de)|(email@kait\.de)|(kai\.timmer@hrz\.tu-chemnitz\.de)|(kait@linux-tage\.de)|(info@noluckinvolved\.com)|(kai\.timmer@gruene-chemnitz\.de)"
+set use_from
+#set reverse_name=yes
+
+auto_view text/html text
+mime_lookup application/octet-stream
+
+#Default Profile
+source ~/.mutt/tucurz.profile
+
+# macros to invoke a profile
+macro   index   <F9>     ":source ~/.mutt/tucurz.profile\n" "Load profile: TUC URZ"
+macro   index   <F10>    ":source ~/.mutt/private.profile\n" "Load profile: PRIVATE"
+macro   index   <F11>    ":source ~/.mutt/clt.profile\n" "Load profile: CLT"
+macro   index   <F12>    ":source ~/.mutt/noluckinvolved.profile\n" "Load profile: NOLUCKINVOLVED"
+
+###########
+#Mailboxen#
+###########
+
+mailboxes =INBOX
+mailboxes =clt
+mailboxes =clug
+mailboxes =hrz_tu-chemnitz_de
+mailboxes =noluckinvolved
+
+folder-hook ".*hrz_tu-chemnitz_de" "source ~/.mutt/tucurz.profile\n"
+folder-hook ".*clt" "source ~/.mutt/clt.profile\n"
+folder-hook ".*INBOX" "source ~/.mutt/private.profile\n"
+folder-hook ".*clug" "source ~/.mutt/private.profile\n"
+folder-hook ".*noluckinvolved" "source ~/.mutt/noluckinvolved.profile\n"
