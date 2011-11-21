@@ -149,8 +149,10 @@ mailboxes =clt
 mailboxes =clug
 mailboxes =hrz_tu-chemnitz_de
 mailboxes =noluckinvolved
+mailboxes =hrz_tu-chemnitz_de/foswiki-discuss
 
 folder-hook ".*hrz_tu-chemnitz_de" "source ~/.mutt/tucurz.profile\n"
+folder-hook ".*hrz_tu-chemnitz_de/foswiki-discuss" "source ~/.mutt/tucurz.profile\n"
 folder-hook ".*clt" "source ~/.mutt/clt.profile\n"
 folder-hook ".*INBOX" "source ~/.mutt/private.profile\n"
 folder-hook ".*clug" "source ~/.mutt/private.profile\n"
