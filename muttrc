@@ -13,7 +13,7 @@ source ~/.mutt/login_data
 
 set folder=imaps://imap.googlemail.com/
 set spoolfile=+INBOX
-set record=""
+set record="+[Google Mail]/Gesendet"
 set postponed="+[Google Mail]/Entwürfe"
 set certificate_file=~/.mutt/certificates
 set header_cache=~/.mutt/hcache
@@ -112,14 +112,9 @@ set ignore_list_reply_to
 set pipe_decode
 
 # Sendmail to background
-#set sendmail="/usr/sbin/sendmail -oem -oi"
-#set sendmail_wait="-1"
+set sendmail="/usr/sbin/sendmail -oem -oi"
+set sendmail_wait="-1"
 #set from=
-
-set query_command = "goobook query '%s'"
-bind editor <Tab> complete-query
-bind editor ^T complete
-macro index,pager a "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
 
 #colors
 source ~/.mutt/color
@@ -140,6 +135,10 @@ macro   index   <F10>    ":source ~/.mutt/private.profile\n" "Load profile: PRIV
 macro   index   <F11>    ":source ~/.mutt/clt.profile\n" "Load profile: CLT"
 macro   index   <F12>    ":source ~/.mutt/noluckinvolved.profile\n" "Load profile: NOLUCKINVOLVED"
 
+#forward with attachments
+set mime_forward=yes
+#set mime_forward_rest=yes
+
 ###########
 #Mailboxen#
 ###########
@@ -150,6 +149,9 @@ mailboxes =clug
 mailboxes =hrz_tu-chemnitz_de
 mailboxes =noluckinvolved
 #mailboxes =hrz_tu-chemnitz_de/foswiki-discuss
+
+# SMIME
+#source ~/.mutt/smime
 
 folder-hook ".*hrz_tu-chemnitz_de" "source ~/.mutt/tucurz.profile\n"
 folder-hook ".*hrz_tu-chemnitz_de/foswiki-discuss" "source ~/.mutt/tucurz.profile\n"
