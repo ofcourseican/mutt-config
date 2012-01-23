@@ -29,7 +29,7 @@ unset imap_passive
 # Automatically poll subscribed mailboxes for new mail (new in 1.5.11)
 #set imap_check_subscribed
 # Reduce polling frequency to a sane level
-set mail_check=60
+set mail_check=30
 # And poll the current mailbox more often (not needed with IDLE in post 1.5.11)
 # set timeout=10
 # keep a cache of headers for faster loading (1.5.9+?)
@@ -37,6 +37,8 @@ set header_cache=~/.hcache
 # Display download progress every 5K
 set net_inc=5
 set rfc2047_parameters=yes
+set askcc=yes
+set askbcc=yes
 
 ###########
 #Der Pager#
