@@ -11,10 +11,10 @@ color indicator brightwhite blue
 color markers brightblue default
 # Signatur einfärben
 color signature brightblue default
-# Die Modelines enthät extra Informationsn 
+# Die Modelines enthät extra Informationsn
 #(z.B. Statuszeile)
 color status brightwhite blue
-# Die '~' zeigt leere Zeilen an 
+# Die '~' zeigt leere Zeilen an
 color tilde brightblue default
 # Baumansicht
 color tree brightred default
@@ -25,6 +25,8 @@ color message brightwhite default
 # Suche
 color search brightyellow default
 
+# geflaggte Nachrichten
+color index brightmagenta default "~F"
 # Mails an mich selbst
 color index brightgreen default "~P"
 # verschlüsselte Mails
@@ -41,12 +43,10 @@ color index yellow default "~D"
 color index blue default "~d >2m"
 # getaggte Nachrichten
 color index brightcyan default "~T"
-# geflaggte Nachrichten
-color index brightmagenta default "~F"
 
-# Mails, die möglicherweise nicht ganz erwünscht 
+# Mails, die möglicherweise nicht ganz erwünscht
 #sind in blau:
- 
+
 # doppelte Nachrichten
 # color index blue default "~="
 # HTML Mails
@@ -58,7 +58,7 @@ color index brightmagenta default "~F"
 # Nachrichten ohne richtigem Betreff
 color index blue default '!~s .*'
 
-# Nachrichten, die von Mutt als Spam markiert wurden 
+# Nachrichten, die von Mutt als Spam markiert wurden
 # (das Muster muß vorher mit spam gesetzt worden sein)
 color index black white '~H SA'
 
@@ -68,7 +68,7 @@ color index brightgreen default "~P"
 # Mails auf die ich geantwortet habe
 color index brightwhite default "~Q"
 
-# Antworten auf meine Mails 
+# Antworten auf meine Mails
 #(durch Spezifizieren der eigenen Domain)
 # color index brightwhite default "(~x 256bit.org)|(~h In-Reply-to:.*@256bit.org)"
 
@@ -77,7 +77,7 @@ color index brightwhite default "~Q"
 color header brightgreen default ^From:
 # Empfänger
 color header brightgreen default ^To:
-# Antwort an: 
+# Antwort an:
 color header brightgreen default ^Reply-To:
 # zusätzliche Empfänger
 color header brightblue default ^Cc:
@@ -90,15 +90,15 @@ color header brightblue default ^X-Mailer:
 color header brightgreen default ^Date:
 
 # Fett wird oft durch *text* angezeigt:
-color body brightyellow   default '(^|\W)[\*]\w.*\w[\*]($|\W)' 
+color body brightyellow   default '(^|\W)[\*]\w.*\w[\*]($|\W)'
 # Unterstrichen durch _text_
 color body brightyellow   default  '(^|\W)_\w.*\w_($|\W)'
 # Kursiv durch /text/
-color body brightyellow default '(^|\W)/\w[^/]*\w/($|\W)' 
+color body brightyellow default '(^|\W)/\w[^/]*\w/($|\W)'
 
 # E-Mail Adressen und URLs:
 color body brightyellow default '\w+://[a-z0-9.~_/%@#?+&=-]+' # URL
-color body brightyellow default "www\\.[-.a-z0-9]+\\.[a-z]{2,3}[a-z0-9.~_/%@#?+ +&=-]*" 
+color body brightyellow default "www\\.[-.a-z0-9]+\\.[a-z]{2,3}[a-z0-9.~_/%@#?+ +&=-]*"
 color body brightyellow default "[a-z0-9.+-]+@[a-z0-9.-]+\\.[a-z]{2,4}" # email
 
 # Smilies
@@ -123,9 +123,9 @@ color body brightyellow default "[ \t][.!?]+"
 #color body brightgreen default "((25[0-5])|(2[0-4][0-9])| ([0-1]?[0-9]{1,2}))\\.((25[0-5])|(2[0-4][0-9])| ([0-1]?[0-9]{1,2}))\\.((25[0-5])|(2[0-4][0-9])| ([0-1]?[0-9]{1,2}))\\.((25[0-5])|(2[0-4][0-9])| ([0-1]?[0-9]{1,2}))"
 
 # Jetzt wird es spannend:
-# Einfärben unterschiedlicher Zitierebenen, 
+# Einfärben unterschiedlicher Zitierebenen,
 # inklusive der Einleitungszeile:
- 
+
 color quoted brightmagenta default
 color body brightmagenta default "^[^>].*(wrote|writes|said|says|schrieb|schreibt|meinte|teilte folgendes mit|[0-9]+\\]|\\.[a-z]{2,4}>).*:"
 

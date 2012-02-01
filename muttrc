@@ -17,14 +17,15 @@ set spoolfile=+INBOX
 set postponed="+[Google Mail]/Entwürfe"
 set certificate_file=~/.mutt/certificates
 set header_cache=~/.mutt/hcache
-set delete
+set delete = yes
+set move = no
 unset wait_key
 unset confirmappend
 # activate TLS if available on the server
 set ssl_starttls=yes
 # always use SSL when connecting to a server
 set ssl_force_tls=yes
-# Don't wait to enter mailbox manually 
+# Don't wait to enter mailbox manually
 unset imap_passive
 # Automatically poll subscribed mailboxes for new mail (new in 1.5.11)
 #set imap_check_subscribed
@@ -32,6 +33,7 @@ unset imap_passive
 set mail_check=30
 # And poll the current mailbox more often (not needed with IDLE in post 1.5.11)
 # set timeout=10
+set imap_keepalive = 300
 # keep a cache of headers for faster loading (1.5.9+?)
 set header_cache=~/.mutt/cache/hcache/
 set message_cachedir = ~/.mutt/cache/bcache/
@@ -49,14 +51,14 @@ set pager_context=1
 set pager_index_lines=10
 set index_format="%4C %Z %D %-25.25n %s"
 set date_format="[%d.%m.%y %H:%M]"
-#set ascii_chars 
+#set ascii_chars
 
 ################
 #Maillinglisten#
 ################
 subscribe \
  clug@clug.de \
- team@linux-tage.de 
+ team@linux-tage.de
 
 #############
 #Mails lesen#
@@ -82,10 +84,9 @@ unhdr_order *
   X-Operating-System: \
   To: Cc: X-Mailling-List: \
   Subject: Date: \
-  X-Spam-Status: 
+  X-Spam-Status:
 
 set nomark_old
-set nomove
 
 ########
 #Header#
@@ -104,7 +105,7 @@ set edit_headers=yes
 # set the envelope sender according to
 # the address used in the From: line.
 # important for bounces.
-set envelope_from 
+set envelope_from
 set followup_to # generate a Followup-To header
 set ignore_list_reply_to
 
@@ -137,6 +138,11 @@ macro   index   <F9>     ":source ~/.mutt/tucurz.profile\n" "Load profile: TUC U
 macro   index   <F10>    ":source ~/.mutt/private.profile\n" "Load profile: PRIVATE"
 macro   index   <F11>    ":source ~/.mutt/clt.profile\n" "Load profile: CLT"
 macro   index   <F12>    ":source ~/.mutt/noluckinvolved.profile\n" "Load profile: NOLUCKINVOLVED"
+
+#change folders
+macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index ga "<change-folder>=[Google<quote-char> Mail]/Alle<quote-char> Nachrichten<enter>" "Go to all mail"
+macro index gs "<change-folder>=[Google<quote-char> Mail]/Gesendet<enter>" "Go to sent Mail"
 
 #forward with attachments
 set mime_forward=yes
